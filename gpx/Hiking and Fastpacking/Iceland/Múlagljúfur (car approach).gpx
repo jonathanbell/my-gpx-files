@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="StravaGPX" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+ <metadata>
+  <name>Múlagljúfur car approach</name>
+  <author>
+   <name>Jonathan Bell</name>
+   <link href="https://www.strava.com/athletes/3350904"/>
+  </author>
+  <copyright author="OpenStreetMap contributors">
+   <year>2020</year>
+   <license>https://www.openstreetmap.org/copyright</license>
+  </copyright>
+  <link href="https://www.strava.com/routes/22229311"/>
+ </metadata>
+ <trk>
+  <name>Múlagljúfur car approach</name>
+  <link href="https://www.strava.com/routes/22229311"/>
+  <type>running</type>
+  <trkseg>
+   <trkpt lat="63.988710000000005" lon="-16.39523">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.989090000000004" lon="-16.39665">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.98932000628951" lon="-16.39799998901916">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.98955000000001" lon="-16.399350000000002">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.98971500474402" lon="-16.400519993349803">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.98988000000001" lon="-16.401690000000002">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99004669011666" lon="-16.403536644570917">
+    <ele>84.35000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.990213356776465" lon="-16.405383311160925">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99038" lon="-16.407230000000002">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99056502808834" lon="-16.40887996723181">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99075003745055" lon="-16.41052995630288">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99093502808627" lon="-16.412179967211472">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99112" lon="-16.41383">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99124000425272" lon="-16.414944995000795">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99136000000001" lon="-16.41606">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99128000768977" lon="-16.417555004219555">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.991200000000006" lon="-16.419050000000002">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.991045006548525" lon="-16.42043000766084">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99089000000001" lon="-16.42181">
+    <ele>96.68</ele>
+   </trkpt>
+   <trkpt lat="63.99068000664892" lon="-16.42320501077039">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99047" lon="-16.4246">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.990410000000004" lon="-16.42623">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99043" lon="-16.427410000000002">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.990790000000004" lon="-16.4292">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99094" lon="-16.43051">
+    <ele>113.99000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99094" lon="-16.43052">
+    <ele>114.0</ele>
+   </trkpt>
+   <trkpt lat="63.991040000000005" lon="-16.43137">
+    <ele>114.0</ele>
+   </trkpt>
+   <trkpt lat="63.991310000000006" lon="-16.43215">
+    <ele>115.89</ele>
+   </trkpt>
+   <trkpt lat="63.99191000329671" lon="-16.433124979118084">
+    <ele>115.89</ele>
+   </trkpt>
+   <trkpt lat="63.99251" lon="-16.4341">
+    <ele>123.00000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99282" lon="-16.435200000000002">
+    <ele>123.00000000000001</ele>
+   </trkpt>
+   <trkpt lat="63.99291" lon="-16.4356">
+    <ele>123.00000000000001</ele>
+   </trkpt>
+  </trkseg>
+ </trk>
+</gpx>
