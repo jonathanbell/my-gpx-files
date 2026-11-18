@@ -316,10 +316,29 @@ Error messages name the offending file.
   fully keyboard operable; visible focus styles; stats exist as text, so the
   chart is not the only source of elevation data; text contrast meets WCAG AA.
 - **Responsive**: works from 360 px wide. No horizontal page scroll.
+- **Branding**: site title is `my-gpx-files` (header, `<title>`, og cards).
+- **Theme**: light and dark, following the OS by default. A toggle overrides
+  it, remembered in `localStorage` (try/catch). Map tiles are unchanged.
 
 ## Tests
 
-`node --test`, focused on build logic:
+Basic unit tests with `node --test` (Node 24 strips TypeScript types, so
+`*.test.ts` runs as-is). No test framework, no extra test dependencies.
+
+Rules:
+
+- Test files sit next to the code they test: `foo.ts` -> `foo.test.ts`.
+- Keep pure logic (parsing, stats, slugs, cache decisions) apart from I/O so
+  it can be tested by calling it with plain inputs. Few mocks, ideally none.
+- Inputs are small inline GPX strings, or real files from `gpx/` when a real
+  shape matters (e.g. multi-segment `Howe Sound Crest Trail.gpx`, the
+  `<rte>`-only `Golden Hinde (v2).gpx`, the Mount Logan overlays).
+- Never hit the network. Geocoding and DEM code split "decide what to fetch"
+  (pure, tested) from "fetch it" (thin, untested).
+- One behaviour per test, named in plain English. Assert on values, not on
+  how they were computed.
+
+Cover:
 
 - slugify (diacritics, parentheses, collisions)
 - path -> category, area, title, overlay
@@ -327,7 +346,11 @@ Error messages name the offending file.
   gives ~0 gain)
 - multi-segment and `<rte>` handling
 - geocode cache: hit, miss, moved start point, stale entry removed
+- build validation: each failure listed under CI / deploy throws an error
+  naming the file
 - existing `scripts/fill-elevation.test.mjs` keeps passing
+
+`npm test` runs every test file and must pass before the build step in CI.
 
 Plus a build smoke test in CI: the build must emit a page, `route.gpx` and
 `og.png` for every non-overlay GPX.
