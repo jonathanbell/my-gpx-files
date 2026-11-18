@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import { href } from '../lib/href.ts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string; // absolute URL
+  layout?: 'page' | 'app';
+}
+
+const { title, description = 'Alpine climbing, hiking, skiing and running routes.', image, layout = 'page' } = Astro.props;
+const SITE = 'my-gpx-files';
+const fullTitle = title ? `${title} · ${SITE}` : SITE;
+const url = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={href('favicon.svg')} type="image/svg+xml" />
+    <link rel="canonical" href={url} />
+    <meta property="og:site_name" content={SITE} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title ?? SITE} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={image} />}
+    {image && <meta property="og:image:width" content="1200" />}
+    {image && <meta property="og:image:height" content="630" />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('theme');
+        if (theme) document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
+  </head>
+  <body class={layout}>
+    <header class="site-header">
+      <a class="brand" href={href('')}>{SITE}</a>
+      <nav>
+        <a href={href('routes/')}>All routes</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" hidden>Theme: auto</button>
+      </nav>
+    </header>
+    <slot />
+    <script is:inline>
+      (() => {
+        const button = document.getElementById('theme-toggle');
+        const next = { auto: 'light', light: 'dark', dark: 'auto' };
+        const root = document.documentElement;
+        const show = () => (button.textContent = `Theme: ${root.dataset.theme ?? 'auto'}`);
+
+        button.hidden = false;
+        show();
+        button.addEventListener('click', () => {
+          const theme = next[root.dataset.theme ?? 'auto'];
+          if (theme === 'auto') delete root.dataset.theme;
+          else root.dataset.theme = theme;
+
+          try {
+            if (theme === 'auto') localStorage.removeItem('theme');
+            else localStorage.setItem('theme', theme);
+          } catch {}
+
+          show();
+          window.dispatchEvent(new Event('themechange'));
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { getSite, previewOf, startOf } from '../lib/site.ts';
+import { dot, km, m } from '../lib/format.ts';
+import { href } from '../lib/href.ts';
+
+const site = await getSite();
+const names = Object.fromEntries(site.categories.map((c) => [c.slug, c.name]));
+
+const routes = site.routes.map((r) => ({
+  url: href(`${r.url}/`),
+  title: r.title,
+  cat: r.categorySlug,
+  category: r.category,
+  area: r.area ?? '',
+  region: r.place?.region ?? '',
+  country: r.place?.country ?? '',
+  distance: km(r.stats.distance),
+  gain: m(r.stats.gain),
+  start: startOf(r),
+  line: previewOf(r),
+  waypoints: r.gpx.waypoints.map((w) => w.name).join(' · '),
+  notes: r.notes?.body ?? '',
+}));
+
+// Escape "<" so the JSON cannot close its <script> tag.
+const json = JSON.stringify({ categories: site.categories, routes }).replaceAll('<', '\\u003c');
+---
+
+<Base layout="app">
+  <main class="home">
+    <aside class="sheet" id="sheet" aria-label="Routes">
+      <button class="handle" id="handle" type="button" aria-expanded="false" aria-controls="results">
+        <span class="visually-hidden">Show or hide the route list</span>
+      </button>
+      <div class="controls">
+        <label class="visually-hidden" for="q">Search routes</label>
+        <input id="q" type="search" placeholder="Search routes, areas, waypoints" autocomplete="off" />
+        <div class="chips" role="group" aria-label="Filter by category">
+          {
+            site.categories.map((c) => (
+              <button type="button" class="chip" data-cat={c.slug} aria-pressed="false" style={`--c: ${c.color}`}>
+                <span class="swatch" />
+                {c.name}
+              </button>
+            ))
+          }
+        </div>
+        <p class="count" id="count" aria-live="polite">{routes.length} routes</p>
+      </div>
+      <ul class="results" id="results">
+        {
+          routes.map((r) => (
+            <li>
+              <a href={r.url} data-url={r.url}>
+                <span class="title">{r.title}</span>
+                <span class="sub">
+                  <span class="swatch" style={`--c: ${site.categories.find((c) => c.slug === r.cat)!.color}`} />
+                  {dot([names[r.cat], r.area || undefined])}
+                </span>
+                <span class="sub">{dot([r.distance, `${r.gain} gain`])}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <footer><a href={href('routes/')}>All routes as a text list</a></footer>
+    </aside>
+    <div class="home-map" id="map" role="region" aria-label="Map of all routes"></div>
+  </main>
+  <script type="application/json" id="data" set:html={json} />
+  <script>
+    import '../scripts/home.ts';
+  </script>
+</Base>

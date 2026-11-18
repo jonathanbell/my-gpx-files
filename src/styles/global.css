@@ -1,0 +1,443 @@
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #1d2321;
+  --muted: #56605c;
+  --line: #dcdcd4;
+  --accent: #005a8c;
+  --focus: #e69f00;
+  --chip-on: #1d2321;
+  --chip-on-ink: #ffffff;
+  --shadow: 0 2px 12px rgb(0 0 0 / 12%);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #141816;
+    --surface: #1c211f;
+    --ink: #e8ebe9;
+    --muted: #a3ada9;
+    --line: #333b38;
+    --accent: #7cc4f0;
+    --chip-on: #e8ebe9;
+    --chip-on-ink: #141816;
+    --shadow: 0 2px 12px rgb(0 0 0 / 45%);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #141816;
+  --surface: #1c211f;
+  --ink: #e8ebe9;
+  --muted: #a3ada9;
+  --line: #333b38;
+  --accent: #7cc4f0;
+  --chip-on: #e8ebe9;
+  --chip-on-ink: #141816;
+  --shadow: 0 2px 12px rgb(0 0 0 / 45%);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+a {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Header */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 3rem;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.brand {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.2rem 0.7rem;
+}
+
+/* Buttons and chips */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button.primary {
+  border-color: var(--chip-on);
+  background: var(--chip-on);
+  color: var(--chip-on-ink);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--chip-on);
+  background: var(--chip-on);
+  color: var(--chip-on-ink);
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 60%);
+}
+
+/* Content pages */
+
+.page main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 16px 4rem;
+}
+
+.meta {
+  color: var(--muted);
+  margin: 0.25rem 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  padding: 0;
+}
+
+.stats div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 0.5rem 0.75rem;
+}
+
+.stats dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.route-map {
+  height: min(60vh, 520px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.profile {
+  min-height: 240px;
+  margin-top: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.notes {
+  margin-top: 2rem;
+  max-width: 70ch;
+}
+
+.route-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.route-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.route-list .numbers {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Home: full-screen map with sidebar or bottom sheet */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.home {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  flex: none;
+  min-height: 0;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.sheet .controls {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sheet input[type='search'] {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  padding: 0.55rem 0.75rem;
+  font: inherit;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.count {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.results {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.results a {
+  display: block;
+  padding: 0.6rem 16px;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.results a:hover,
+.results a:focus-visible {
+  background: var(--bg);
+}
+
+.results .title {
+  font-weight: 600;
+}
+
+.results .sub {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.sheet footer {
+  padding: 0.6rem 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.handle {
+  display: none;
+}
+
+.home-map {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .home-map {
+    position: absolute;
+    inset: 0;
+  }
+
+  .sheet {
+    position: absolute;
+    z-index: 3; /* above MapLibre controls when open */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 75%;
+    border-right: 0;
+    border-radius: 16px 16px 0 0;
+    box-shadow: var(--shadow);
+    transform: translateY(calc(100% - 9.5rem));
+    transition: transform 0.25s ease;
+  }
+
+  .sheet[data-state='open'] {
+    transform: none;
+  }
+
+  .handle {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0.5rem 0 0;
+    touch-action: none;
+  }
+
+  .handle::before {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 0.3rem;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: var(--line);
+  }
+
+  .sheet .controls {
+    padding-top: 6px;
+  }
+
+  /* Keep attribution and scale above the collapsed sheet. */
+  .home-map .maplibregl-ctrl-bottom-left,
+  .home-map .maplibregl-ctrl-bottom-right {
+    bottom: 9.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    transition: none;
+  }
+}
+
+/* Map bits */
+
+.layer-switch {
+  display: flex;
+  font-size: 0.8rem;
+}
+
+.maplibregl-ctrl-group.layer-switch button {
+  width: auto;
+  height: auto;
+  border: 0;
+  background: #fff;
+  color: #1d2321;
+  padding: 0.3rem 0.6rem;
+}
+
+.maplibregl-ctrl-group.layer-switch button[aria-pressed='true'] {
+  background: #1d2321;
+  color: #fff;
+}
+
+.maplibregl-popup-content {
+  color: #1d2321;
+  font: 0.85rem/1.3 system-ui, sans-serif;
+  padding: 0.4rem 0.6rem;
+}

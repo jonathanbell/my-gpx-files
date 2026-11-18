@@ -1,0 +1,97 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { areaOf, getSite, routeData, type Route } from '../../lib/site.ts';
+import { dot, isoDate, km, m } from '../../lib/format.ts';
+import { href } from '../../lib/href.ts';
+
+export async function getStaticPaths() {
+  const site = await getSite();
+  return site.routes.map((route) => ({ params: { path: route.url }, props: { route } }));
+}
+
+const { route } = Astro.props as { route: Route };
+const site = await getSite();
+const { overlays, siblings } = areaOf(route, site);
+const { stats, notes } = route;
+const Notes = notes ? (await render(notes)).Content : undefined;
+
+const place = dot([route.place?.region, route.place?.country]);
+const description = dot([km(stats.distance), `${m(stats.gain)} gain`, route.category]);
+const image = new URL(href(`${route.url}/og.png`), Astro.site).href;
+const json = JSON.stringify(routeData(route, overlays)).replaceAll('<', '\\u003c');
+---
+
+<Base title={route.title} description={description} image={image}>
+  <main>
+    <p><a href={href('')} id="back">← Map</a> · <a href={href('routes/')}>All routes</a></p>
+    <h1>{route.title}</h1>
+    <p class="meta">{dot([route.category, route.area, place || undefined])}</p>
+    {
+      (notes?.data.date || notes?.data.partners) && (
+        <p class="meta">
+          {dot([notes.data.date && isoDate(notes.data.date), notes.data.partners && `With ${notes.data.partners.join(', ')}`])}
+        </p>
+      )
+    }
+
+    <dl class="stats">
+      <div><dt>Distance</dt><dd>{km(stats.distance)}</dd></div>
+      <div><dt>Gain</dt><dd>{m(stats.gain)}</dd></div>
+      <div><dt>Loss</dt><dd>{m(stats.loss)}</dd></div>
+      <div><dt>Max</dt><dd>{m(stats.max)}</dd></div>
+      <div><dt>Min</dt><dd>{m(stats.min)}</dd></div>
+    </dl>
+
+    <div class="route-map" id="map" role="region" aria-label={`Map of ${route.title}`}></div>
+    <div class="profile" id="profile" role="img" aria-label={`Elevation profile: ${m(stats.min)} to ${m(stats.max)}`}></div>
+
+    <div class="actions">
+      <a class="button primary" href="route.gpx" download={route.name}>Download GPX</a>
+      <button class="button" type="button" id="copy" hidden>Copy link</button>
+    </div>
+
+    {
+      Notes && (
+        <section class="notes">
+          <Notes />
+        </section>
+      )
+    }
+
+    {
+      overlays.length > 0 && (
+        <section>
+          <h2>Overlays</h2>
+          <ul>
+            {overlays.map((o) => (
+              <li>
+                <a href={href(`${o.url}/route.gpx`)} download={o.name}>{o.title}</a> (GPX)
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      siblings.length > 0 && (
+        <section>
+          <h2>More in {route.area}</h2>
+          <ul class="route-list">
+            {siblings.map((r) => (
+              <li>
+                <a href={href(`${r.url}/`)}>{r.title}</a>
+                <span class="numbers">{dot([km(r.stats.distance), `${m(r.stats.gain)} gain`])}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+  <script type="application/json" id="data" set:html={json} />
+  <script>
+    import '../../scripts/route.ts';
+  </script>
+</Base>

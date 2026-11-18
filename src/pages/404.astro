@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/href.ts';
+---
+
+<Base title="Not found">
+  <main>
+    <h1>Route not found</h1>
+    <p>It may have been renamed or moved. <a href={href('')}>Back to the map</a> or browse <a href={href('routes/')}>all routes</a>.</p>
+  </main>
+</Base>

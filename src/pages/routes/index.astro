@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getSite, type Route } from '../../lib/site.ts';
+import { dot, km, m } from '../../lib/format.ts';
+import { href } from '../../lib/href.ts';
+
+// Plain text index: category -> area (routes without an area first) -> title.
+const site = await getSite();
+const NO_AREA = '';
+
+const groups = site.categories.map((c) => {
+  const inCategory = site.routes.filter((r) => r.categorySlug === c.slug);
+  const areas = Map.groupBy(inCategory, (r) => r.area ?? NO_AREA);
+  const names = [...areas.keys()].sort((a, b) => (a === NO_AREA ? -1 : b === NO_AREA ? 1 : a.localeCompare(b, 'en')));
+
+  return { category: c, areas: names.map((name) => ({ name, routes: areas.get(name)! })) };
+});
+
+const row = (r: Route) => dot([dot([r.place?.region, r.place?.country]) || undefined, km(r.stats.distance), `${m(r.stats.gain)} gain`]);
+---
+
+<Base title="All routes" description={`${site.routes.length} routes, grouped by category and area.`}>
+  <main>
+    <h1>All routes</h1>
+    <p class="meta">{site.routes.length} routes</p>
+    {
+      groups.map(({ category, areas }) => (
+        <section>
+          <h2>
+            <span class="swatch" style={`--c: ${category.color}`} /> {category.name}
+          </h2>
+          {areas.map((area) => (
+            <>
+              {area.name && <h3>{area.name}</h3>}
+              <ul class="route-list">
+                {area.routes.map((r) => (
+                  <li>
+                    <a href={href(`${r.url}/`)}>{r.title}</a>
+                    <span class="numbers">{row(r)}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
+        </section>
+      ))
+    }
+  </main>
+</Base>
