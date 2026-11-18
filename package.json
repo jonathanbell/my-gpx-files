@@ -1,0 +1,12 @@
+{
+  "name": "my-gpx-files",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fill-elevation": "node scripts/fill-elevation.mjs",
+    "test": "node --test scripts/"
+  },
+  "dependencies": {
+    "geotiff": "3.0.5"
+  }
+}
