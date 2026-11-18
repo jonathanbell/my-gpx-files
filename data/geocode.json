@@ -1,0 +1,647 @@
+{
+  "gpx/Alpine Climbing/Cataract Arete (Colonel Foster).gpx": {
+    "coord": [
+      -125.85051,
+      49.75251
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Alpine Climbing/Coleman Demming (Mount Baker).gpx": {
+    "coord": [
+      -121.89744,
+      48.80576
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Alpine Climbing/King's Peak.gpx": {
+    "coord": [
+      -125.83924,
+      49.8528
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Alpine Climbing/Mount Daniel.gpx": {
+    "coord": [
+      -121.14272,
+      47.55609
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Alpine Climbing/Mount Garibaldi/Mount Garibaldi (mountain bike approach).gpx": {
+    "coord": [
+      -123.08846,
+      49.83141
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Alpine Climbing/Mount Garibaldi/Mount Garibaldi (partial route).gpx": {
+    "coord": [
+      -123.0535,
+      49.85283
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Alpine Climbing/Mount Logan/Kings Trench route.gpx": {
+    "coord": [
+      -140.81763,
+      60.60454
+    ],
+    "region": "Yukon",
+    "country": "Canada"
+  },
+  "gpx/Alpine Climbing/Mount Rainier (Disappointment Cleaver route).gpx": {
+    "coord": [
+      -121.73521,
+      46.78698
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Alpine Climbing/The Tooth (North Cascades).gpx": {
+    "coord": [
+      -121.42377,
+      47.44525
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Alpine Climbing/Tree + Stump Routes (Leavenworth).gpx": {
+    "coord": [
+      -120.76585,
+      47.55272
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Alpine Climbing/Unjudges Mount Arrowsmith.gpx": {
+    "coord": [
+      -124.61745,
+      49.2169
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Assiniboine/Magog Lake to Mount Shark helicopter parking (Assiniboine).gpx": {
+    "coord": [
+      -115.63937,
+      50.90407
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Assiniboine/Nub Peak Loop (Assiniboine).gpx": {
+    "coord": [
+      -115.63936,
+      50.90407
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Assiniboine/Walk from parking lot to helipad (Assiniboine).gpx": {
+    "coord": [
+      -115.37897,
+      50.85916
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Bryce Canyon Fairyland loop.gpx": {
+    "coord": [
+      -112.1695,
+      37.63948
+    ],
+    "region": "Utah",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Bryce Canyon Whiteman Connector to Swamp Trailhead.gpx": {
+    "coord": [
+      -112.23867,
+      37.56406
+    ],
+    "region": "Utah",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Cirque Peak.gpx": {
+    "coord": [
+      -116.43876,
+      51.66417
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Consolation Lakes (start of Panorama Peak route).gpx": {
+    "coord": [
+      -116.1809,
+      51.3284
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Cream Lake (Strathcona Park).gpx": {
+    "coord": [
+      -125.58673,
+      49.52307
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Dän Zhùr (Donjek)/Donjek (Strava).gpx": {
+    "coord": [
+      -139.15378,
+      61.38035
+    ],
+    "region": "Yukon",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Golden Hinde (v1).gpx": {
+    "coord": [
+      -125.61013,
+      49.57502
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Golden Hinde (v2).gpx": {
+    "coord": [
+      -125.61046,
+      49.57512
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Grand Pass, lakes, and Lillian Ridge Way.gpx": {
+    "coord": [
+      -123.38202,
+      47.91826
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Half Note Trail (Whistler).gpx": {
+    "coord": [
+      -122.95776,
+      50.05901
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Helena Ridge.gpx": {
+    "coord": [
+      -115.91571,
+      51.26966
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Howe Sound Crest Trail.gpx": {
+    "coord": [
+      -123.20395,
+      49.39583
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Iceland/Múlagljúfur (car approach).gpx": {
+    "coord": [
+      -16.39523,
+      63.98871
+    ],
+    "country": "Iceland"
+  },
+  "gpx/Hiking and Fastpacking/Iceland/Múlagljúfur.gpx": {
+    "coord": [
+      -16.43615,
+      63.99304
+    ],
+    "country": "Iceland"
+  },
+  "gpx/Hiking and Fastpacking/Iceland/Svartifoss.gpx": {
+    "coord": [
+      -16.97177,
+      64.01679
+    ],
+    "country": "Iceland"
+  },
+  "gpx/Hiking and Fastpacking/Kludhak/Car approach to Tower Cabin.gpx": {
+    "coord": [
+      -124.07633,
+      48.43498
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Mount Cheam.gpx": {
+    "coord": [
+      -121.7377,
+      49.19136
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Mount Edith Cavell.gpx": {
+    "coord": [
+      -115.65101,
+      51.174
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Mount Myra.gpx": {
+    "coord": [
+      -125.61049,
+      49.57499
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Mount Smutwood.gpx": {
+    "coord": [
+      -115.35103,
+      50.8389
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Crouching Lion.gpx": {
+    "coord": [
+      -157.8663,
+      21.55807
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Kapalama Trail.gpx": {
+    "coord": [
+      -157.84793,
+      21.33933
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Lanikai Pillbox.gpx": {
+    "coord": [
+      -157.71946,
+      21.39027
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Makiki Valley Loop.gpx": {
+    "coord": [
+      -157.82941,
+      21.31406
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Moanalua Ridge (Stairway to Heaven exit).gpx": {
+    "coord": [
+      -157.88044,
+      21.37401
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Mount Olympus (via crater).gpx": {
+    "coord": [
+      -157.78187,
+      21.3109
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Olomana Ridge.gpx": {
+    "coord": [
+      -157.76169,
+      21.37693
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Oahu/Wiliwilinui Ridge.gpx": {
+    "coord": [
+      -157.76261,
+      21.29851
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Pea Soup Lake.gpx": {
+    "coord": [
+      -121.09768,
+      47.54476
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Pinnacle Peak and tarn.gpx": {
+    "coord": [
+      -121.73111,
+      46.76829
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Pogo Mountain.gpx": {
+    "coord": [
+      -125.368,
+      49.27359
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Reflection Tarn (Mount Rainier).gpx": {
+    "coord": [
+      -121.73112,
+      46.76829
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Sentinel Pass.gpx": {
+    "coord": [
+      -116.1814,
+      51.32888
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Squamish Chief hike.gpx": {
+    "coord": [
+      -123.13976,
+      49.69075
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Teewinot mountain.gpx": {
+    "coord": [
+      -110.74252,
+      43.73598
+    ],
+    "region": "Wyoming",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/The Enchantments (E2E).gpx": {
+    "coord": [
+      -120.82081,
+      47.52776
+    ],
+    "region": "Washington",
+    "country": "United States"
+  },
+  "gpx/Hiking and Fastpacking/Torres del Paine (Patagonia).gpx": {
+    "coord": [
+      -72.8655,
+      -50.96615
+    ],
+    "region": "Magallanes and Chilean Antarctica Region",
+    "country": "Chile"
+  },
+  "gpx/Hiking and Fastpacking/Watersprite Lake (v1).gpx": {
+    "coord": [
+      -122.9336,
+      49.75464
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Watersprite Lake (v2).gpx": {
+    "coord": [
+      -122.93476,
+      49.75196
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Hiking and Fastpacking/Yamnuska.gpx": {
+    "coord": [
+      -115.08882,
+      51.12135
+    ],
+    "region": "Alberta",
+    "country": "Canada"
+  },
+  "gpx/Rock Climbing/Cardiac Crag (Mount Finlayson).gpx": {
+    "coord": [
+      -123.5395,
+      48.48296
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Castle Towers from Daisy Lake Road.gpx": {
+    "coord": [
+      -123.13902,
+      49.97357
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Elfin Lakes area.gpx": {
+    "coord": [
+      -123.04916,
+      49.75003
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Hourglass Gully.gpx": {
+    "coord": [
+      -117.52159,
+      51.30174
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Ledge Couloir (plus bonus laps).gpx": {
+    "coord": [
+      -123.12855,
+      49.6713
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Metal Dome.gpx": {
+    "coord": [
+      -123.16534,
+      50.08274
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Alan Brooks.gpx": {
+    "coord": [
+      -125.3206,
+      49.74559
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Becher.gpx": {
+    "coord": [
+      -125.16329,
+      49.66108
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Brew.gpx": {
+    "coord": [
+      -123.19233,
+      49.9954
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Cokely.gpx": {
+    "coord": [
+      -124.5856,
+      49.28789
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Garibaldi (trail to Tent Col).gpx": {
+    "coord": [
+      -123.03538,
+      49.85491
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mount Washington Slack Country.gpx": {
+    "coord": [
+      -125.23512,
+      49.7481
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Mt Myra.gpx": {
+    "coord": [
+      -125.61005,
+      49.5751
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Sky Pilot/Sky Pilot (v1).gpx": {
+    "coord": [
+      -123.13076,
+      49.6711
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Sky Pilot/Sky Pilot (v2).gpx": {
+    "coord": [
+      -123.13078,
+      49.67145
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Sky Pilot/Sky Pilot (with Copilot).gpx": {
+    "coord": [
+      -123.16394,
+      49.67108
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Spearhead Traverse/Spearhead Traverse (South face of Mount MacBeth from the summit).gpx": {
+    "coord": [
+      -122.87752,
+      50.09046
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Spearhead Traverse/Spearhead Traverse (modified).gpx": {
+    "coord": [
+      -122.95354,
+      50.11325
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Spearhead Traverse/Spearhead Traverse (v1).gpx": {
+    "coord": [
+      -122.89586,
+      50.07894
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Tantalus (skiing from and back to the hut).gpx": {
+    "coord": [
+      -123.31125,
+      49.79671
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Ski Mountaineering/Whistler (big day).gpx": {
+    "coord": [
+      -122.92346,
+      50.11124
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Trail Running/Chief Loop.gpx": {
+    "coord": [
+      -123.13035,
+      49.69505
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Trail Running/Diamond Head.gpx": {
+    "coord": [
+      -157.82866,
+      21.28408
+    ],
+    "region": "Hawaii",
+    "country": "United States"
+  },
+  "gpx/Trail Running/Evac Gully (Squamish Chief).gpx": {
+    "coord": [
+      -123.15266,
+      49.67313
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Trail Running/Finlayson Arm 50K.gpx": {
+    "coord": [
+      -123.54604,
+      48.46407
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Trail Running/Gowland Todd.gpx": {
+    "coord": [
+      -123.49527,
+      48.54889
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  },
+  "gpx/Trail Running/High Note Trail.gpx": {
+    "coord": [
+      -122.95776,
+      50.05901
+    ],
+    "region": "British Columbia",
+    "country": "Canada"
+  }
+}
