@@ -342,6 +342,11 @@ Rewrite `README.md`:
   to `git pull` after pushing.
 - Local dev: `npm ci`, `npm run dev`, `npm test`.
 
+Once the scaffold builds and tests run, add a `CLAUDE.md` covering the real
+commands and layout, plus these rules: `gpx/` is the source of truth; never
+modify recorded elevation; ` [overlay]` marks hazard polygons; CI commits
+back to `main`, so pull after pushing.
+
 ## Acceptance criteria
 
 1. Pushing a new GPX with no elevation to `main` via the GitHub web UI
