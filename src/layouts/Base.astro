@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
 import { href } from '../lib/href.ts';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, description = 'Alpine climbing, hiking, skiing and running routes.', image, layout = 'page' } = Astro.props;
-const SITE = 'my-gpx-files';
+const SITE = 'Jonathan Bell\'s GPX files';
 const fullTitle = title ? `${title} · ${SITE}` : SITE;
 const url = new URL(Astro.url.pathname, Astro.site);
 ---
