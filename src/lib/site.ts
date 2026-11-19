@@ -6,7 +6,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { loadGpx, type GpxFile } from './routes.ts';
 import { computeStats, downsample, haversine, profile, type Stats } from './stats.ts';
 import { simplifyTo } from './simplify.ts';
-import { categoryColors } from './colors.ts';
+import { categoryColors, overlayColor } from './colors.ts';
 import type { GeocodeCache, Place } from './geocode.ts';
 import type { LonLat } from './gpx.ts';
 
@@ -116,7 +116,7 @@ export function routeData(route: Route, overlays: GpxFile[]) {
     start: startOf(route),
     end: haversine(first, last) > SAME_SPOT ? [r5(last[0]), r5(last[1])] : null,
     waypoints,
-    overlays: overlays.map((o) => simplifyTo(o.gpx.lines, ROUTE_POINTS)),
+    overlays: overlays.map((o, i) => ({ title: o.title, color: overlayColor(i), rings: simplifyTo(o.gpx.lines, ROUTE_POINTS) })),
   };
 }
 

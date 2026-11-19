@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { areaOf, getSite, routeData, type Route } from '../../lib/site.ts';
 import { dot, isoDate, km, m } from '../../lib/format.ts';
 import { href } from '../../lib/href.ts';
+import { overlayColor } from '../../lib/colors.ts';
 
 export async function getStaticPaths() {
   const site = await getSite();
@@ -64,9 +65,9 @@ const json = JSON.stringify(routeData(route, overlays)).replaceAll('<', '\\u003c
         <section>
           <h2>Overlays</h2>
           <ul>
-            {overlays.map((o) => (
+            {overlays.map((o, i) => (
               <li>
-                <a href={href(`${o.url}/route.gpx`)} download={o.name}>{o.title}</a> (GPX)
+                <span class="swatch" style={`--c: ${overlayColor(i)}`} /> <a href={href(`${o.url}/route.gpx`)} download={o.name}>{o.title}</a> (GPX)
               </li>
             ))}
           </ul>

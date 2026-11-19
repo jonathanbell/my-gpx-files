@@ -1,6 +1,9 @@
-// Okabe-Ito, colour-blind safe. Red is kept for hazard overlays.
+// Okabe-Ito, colour-blind safe, for routes.
 const PALETTE = ['#0072B2', '#009E73', '#E69F00', '#56B4E9', '#CC79A7', '#D55E00', '#7F7F7F'];
-export const OVERLAY_COLOR = '#E41A1C';
+
+// Hazard overlays, in area order. Kept clear of the route palette.
+const OVERLAY_COLORS = ['#E41A1C', '#7B2CBF', '#A65628', '#333333'];
+export const overlayColor = (i: number) => OVERLAY_COLORS[i % OVERLAY_COLORS.length];
 
 const FIXED: Record<string, string> = {
   'alpine-climbing': PALETTE[0],

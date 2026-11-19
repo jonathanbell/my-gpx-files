@@ -85,8 +85,10 @@ Notes text is included in search.
 
 ### Overlays
 
-- Drawn as translucent red filled polygons (close the ring if the GPX does
-  not) on every route page in the same area folder.
+- Drawn as translucent filled polygons (close the ring if the GPX does not)
+  on every route page in the same area folder. Each overlay file gets its
+  own colour and a map label with its title; the Overlays list shows the
+  same colour.
 - Excluded from the home map, list, search, stats and "More in this area".
 - Not given their own page. Still downloadable from the route pages that show
   them (small "Overlays" list with download links).
@@ -191,9 +193,10 @@ New script `scripts/geocode.mjs`, run as `npm run geocode`.
 ### Home
 
 - Full-screen map with a sidebar (desktop) or swipe-up bottom sheet (mobile).
-- **Map**: one pin per route at its start point, coloured by category, using
-  clustering when zoomed out. Hovering a pin or list item shows that route's
-  preview line. Clicking opens the route page. Initial view fits all routes.
+- **Map**: every route's preview line is always drawn, coloured by category,
+  plus one pin per route at its start point, clustered when zoomed out.
+  Hovering a line, pin or list item highlights the route and shows its name.
+  Clicking a line or pin opens the route page. Initial view fits all routes.
 - **Sidebar**:
   - Search box. Fuzzy (Fuse.js) over title, category, area, region, country,
     waypoint names and notes text. `rainer` finds Rainier, `burman` finds
@@ -257,8 +260,15 @@ Each route page has:
 - MapLibre GL JS.
 - Base layers, toggleable from a small control:
   - OpenTopoMap raster (default): `https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png`
+  - Outdoor: OpenFreeMap Liberty vector style
+    (`https://tiles.openfreemap.org/styles/liberty`, OSM trails) plus
+    hillshade and contour lines (`maplibre-contour`) built in the browser
+    from Terrarium DEM tiles
+    (`https://elevation-tiles-prod.s3.amazonaws.com/terrarium/{z}/{x}/{y}.png`).
+    The contour code loads only when this layer is picked.
   - Esri World Imagery raster:
     `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}`
+- Switching layers keeps the page's own sources and layers.
 - Show the attribution each provider requires. Remember the chosen layer per
   visitor in `localStorage`, wrapped in try/catch.
 - No API keys anywhere.
@@ -378,7 +388,7 @@ back to `main`, so pull after pushing.
 2. Pasting a route URL into iMessage or Slack shows a card with the title,
    stats and the generated preview image.
 3. On the home page, typing `rainer` lists Mount Rainier; toggling
-   "Alpine Climbing" hides all other categories' pins; reloading the URL
+   "Alpine Climbing" hides all other categories' pins and lines; reloading the URL
    restores both.
 4. On a route page, hovering the elevation chart moves a dot on the map.
 5. The Mount Logan route page shows the crevasse and avalanche overlays. The

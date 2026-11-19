@@ -16,13 +16,12 @@ interface Data {
   start: LonLat;
   end: LonLat | null;
   waypoints: { name: string; coord: LonLat; at: number | null }[];
-  overlays: LonLat[][][];
+  overlays: { title: string; color: string; rings: LonLat[][] }[];
 }
 
 const KM = 1000;
 const CHART_HEIGHT = 240;
 const PADDING = 40;
-const OVERLAY_COLOR = '#E41A1C';
 const START_COLOR = '#1a9850';
 const END_COLOR = '#1d2321';
 
@@ -87,14 +86,15 @@ function nearest({ lng, lat }: LngLat): number {
 map.on('load', () => {
   map.addSource('overlays', {
     type: 'geojson',
-    data: collection(data.overlays.flatMap((o) => o.map((ring) => feature({ type: 'Polygon', coordinates: [closeRing(ring)] })))),
+    data: collection(data.overlays.flatMap((o) =>
+      o.rings.map((ring) => feature({ type: 'Polygon', coordinates: [closeRing(ring)] }, { title: o.title, color: o.color })))),
   });
   map.addSource('route', { type: 'geojson', data: feature({ type: 'MultiLineString', coordinates: data.lines }) });
   map.addSource('markers', { type: 'geojson', data: collection(markers) });
   map.addSource('cursor', { type: 'geojson', data: collection([]) });
 
-  map.addLayer({ id: 'overlay-fill', type: 'fill', source: 'overlays', paint: { 'fill-color': OVERLAY_COLOR, 'fill-opacity': 0.25 } });
-  map.addLayer({ id: 'overlay-line', type: 'line', source: 'overlays', paint: { 'line-color': OVERLAY_COLOR, 'line-width': 1.5 } });
+  map.addLayer({ id: 'overlay-fill', type: 'fill', source: 'overlays', paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.25 } });
+  map.addLayer({ id: 'overlay-line', type: 'line', source: 'overlays', paint: { 'line-color': ['get', 'color'], 'line-width': 1.5 } });
   map.addLayer({ id: 'route-casing', type: 'line', source: 'route', paint: { 'line-color': '#fff', 'line-width': 7 },
     layout: { 'line-join': 'round', 'line-cap': 'round' } });
   map.addLayer({ id: 'route', type: 'line', source: 'route', paint: { 'line-color': data.color, 'line-width': 4 },
@@ -102,6 +102,9 @@ map.on('load', () => {
   map.addLayer({ id: 'route-hit', type: 'line', source: 'route', paint: { 'line-color': '#000', 'line-opacity': 0, 'line-width': 18 } });
   map.addLayer({ id: 'markers', type: 'circle', source: 'markers',
     paint: { 'circle-color': ['get', 'color'], 'circle-radius': 7, 'circle-stroke-color': '#1d2321', 'circle-stroke-width': 2 } });
+  map.addLayer({ id: 'overlay-label', type: 'symbol', source: 'overlays',
+    layout: { 'text-field': ['get', 'title'], 'text-font': ['Noto Sans Bold'], 'text-size': 12 },
+    paint: { 'text-color': ['get', 'color'], 'text-halo-color': '#fff', 'text-halo-width': 1.5 } });
   map.addLayer({ id: 'cursor', type: 'circle', source: 'cursor',
     paint: { 'circle-color': data.color, 'circle-radius': 7, 'circle-stroke-color': '#fff', 'circle-stroke-width': 3 } });
 });
@@ -166,6 +169,14 @@ function drawWaypoints(u: uPlot) {
   ctx.restore();
 }
 
+// Crosshair follows the profile, not the mouse's height.
+function snap(u: uPlot, left: number, top: number): [number, number] {
+  if (left < 0) return [left, top];
+
+  const i = u.posToIdx(left);
+  return [u.valToPos(xs[i], 'x'), u.valToPos(ys[i], 'y')];
+}
+
 function drawChart() {
   chart?.destroy();
 
@@ -177,7 +188,7 @@ function drawChart() {
       width: profileEl.clientWidth,
       height: CHART_HEIGHT,
       scales: { x: { time: false } },
-      cursor: { drag: { x: false, y: false }, points: { size: 10 } },
+      cursor: { drag: { x: false, y: false }, points: { size: 10 }, move: snap },
       series: [
         { label: 'Distance', value: (_, v) => (v == null ? '-' : kmLabel(v)) },
         { label: 'Elevation', stroke: data.color, fill: `${data.color}40`, width: 2, points: { show: false },

@@ -1,4 +1,4 @@
-// Home page: clustered pins, fuzzy search, category chips and a result list
+// Home page: every route line plus clustered start pins, fuzzy search, category chips and a result list
 // limited to the map viewport. Filter state lives in the query string.
 
 import Fuse from 'fuse.js';
@@ -73,14 +73,14 @@ const points = (items: Item[]): GeoJSON.FeatureCollection => ({
   })),
 });
 
-const lines: GeoJSON.FeatureCollection = {
+const lines = (items: Item[]): GeoJSON.FeatureCollection => ({
   type: 'FeatureCollection',
-  features: routes.map((r) => ({
+  features: items.map((r) => ({
     type: 'Feature',
-    properties: { url: r.url, color: colors[r.cat] },
+    properties: { url: r.url, title: r.title, color: colors[r.cat] },
     geometry: { type: 'MultiLineString', coordinates: r.line },
   })),
-};
+});
 
 const bounds = routes.reduce((b, r) => b.extend(r.start), new LngLatBounds(routes[0].start, routes[0].start));
 const map = createMap(document.getElementById('map')!, { bounds, fitBoundsOptions: { padding: PADDING } });
@@ -143,18 +143,25 @@ function update() {
     sessionStorage.setItem(HOME_SEARCH_KEY, qs);
   } catch {}
 
-  if (loaded) (map.getSource('routes') as GeoJSONSource).setData(points(matches()));
+  if (loaded) {
+    (map.getSource('routes') as GeoJSONSource).setData(points(matches()));
+    (map.getSource('lines') as GeoJSONSource).setData(lines(matches()));
+  }
   renderList();
 }
 
 map.on('load', () => {
   map.addSource('routes', { type: 'geojson', data: points(matches()), cluster: true, clusterRadius: 40, clusterMaxZoom: 11 });
-  map.addSource('lines', { type: 'geojson', data: lines });
+  map.addSource('lines', { type: 'geojson', data: lines(matches()) });
 
+  const round = { 'line-join': 'round', 'line-cap': 'round' } as const;
+  map.addLayer({ id: 'lines-casing', type: 'line', source: 'lines', paint: { 'line-color': '#fff', 'line-width': 5 }, layout: round });
+  map.addLayer({ id: 'lines', type: 'line', source: 'lines', paint: { 'line-color': ['get', 'color'], 'line-width': 3 }, layout: round });
+  map.addLayer({ id: 'lines-hit', type: 'line', source: 'lines', paint: { 'line-color': '#000', 'line-opacity': 0, 'line-width': 14 } });
   map.addLayer({ id: 'preview-casing', type: 'line', source: 'lines', filter: ['==', ['get', 'url'], NONE],
-    paint: { 'line-color': '#fff', 'line-width': 7 }, layout: { 'line-join': 'round', 'line-cap': 'round' } });
+    paint: { 'line-color': '#fff', 'line-width': 9 }, layout: round });
   map.addLayer({ id: 'preview', type: 'line', source: 'lines', filter: ['==', ['get', 'url'], NONE],
-    paint: { 'line-color': ['get', 'color'], 'line-width': 4 }, layout: { 'line-join': 'round', 'line-cap': 'round' } });
+    paint: { 'line-color': ['get', 'color'], 'line-width': 5 }, layout: round });
   map.addLayer({ id: 'clusters', type: 'circle', source: 'routes', filter: ['has', 'point_count'],
     paint: { 'circle-color': '#1d2321', 'circle-radius': ['step', ['get', 'point_count'], 13, 10, 17, 30, 21],
       'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
@@ -170,18 +177,34 @@ map.on('load', () => {
 
 map.on('moveend', renderList);
 
-map.on('mouseenter', 'pins', (e: MapLayerMouseEvent) => {
+// Pins and lines both name the route on hover and open it on click. Pins and
+// clusters sit on top, so a line yields to them.
+
+const onPin = (e: MapLayerMouseEvent) => map.queryRenderedFeatures(e.point, { layers: ['pins', 'clusters'] }).length > 0;
+
+map.on('mousemove', 'pins', (e) => {
   const f = e.features![0];
   map.getCanvas().style.cursor = 'pointer';
   highlight(f.properties.url, f.properties.title, (f.geometry as GeoJSON.Point).coordinates as LonLat);
 });
 
-map.on('mouseleave', 'pins', () => {
-  map.getCanvas().style.cursor = '';
-  highlight(NONE);
+map.on('mousemove', 'lines-hit', (e) => {
+  if (onPin(e)) return;
+
+  const f = e.features![0];
+  map.getCanvas().style.cursor = 'pointer';
+  highlight(f.properties.url, f.properties.title, e.lngLat.toArray());
 });
 
+for (const layer of ['pins', 'lines-hit']) {
+  map.on('mouseleave', layer, () => {
+    map.getCanvas().style.cursor = '';
+    highlight(NONE);
+  });
+}
+
 map.on('click', 'pins', (e) => location.assign(e.features![0].properties.url));
+map.on('click', 'lines-hit', (e) => onPin(e) || location.assign(e.features![0].properties.url));
 
 map.on('mouseenter', 'clusters', () => (map.getCanvas().style.cursor = 'pointer'));
 map.on('mouseleave', 'clusters', () => (map.getCanvas().style.cursor = ''));

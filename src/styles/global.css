@@ -431,7 +431,7 @@ h3 {
   padding: 0.3rem 0.6rem;
 }
 
-.maplibregl-ctrl-group.layer-switch button[aria-pressed='true'] {
+.maplibregl-ctrl-group.layer-switch button[aria-pressed='true']:not(:disabled) {
   background: #1d2321;
   color: #fff;
 }

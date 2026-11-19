@@ -26,8 +26,8 @@ gpx/
   `Hiking and Fastpacking/Dän Zhùr (Donjek)/Donjek (Strava).gpx` ->
   `/hiking-and-fastpacking/dan-zhur-donjek/donjek-strava/`. Renaming or moving
   a file changes its URL.
-- Files ending in ` [overlay].gpx` are drawn as red polygons on every route
-  page in the same area folder. They get no page of their own.
+- Files ending in ` [overlay].gpx` are drawn as labelled, coloured polygons
+  on every route page in the same area folder. They get no page of their own.
 
 ### Notes
 
