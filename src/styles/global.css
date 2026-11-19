@@ -461,3 +461,15 @@ h3 {
 .axis-badge.y {
   transform: translate(calc(-100% - 4px), -50%);
 }
+
+/* Big screens: use the width, and give the route map most of the height. */
+@media (min-width: 1400px) {
+  .page main {
+    max-width: 1760px;
+    padding-inline: 32px;
+  }
+
+  .route-map {
+    height: min(75vh, 1000px);
+  }
+}
