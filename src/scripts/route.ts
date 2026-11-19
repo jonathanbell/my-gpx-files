@@ -132,6 +132,7 @@ map.on('mouseleave', 'route-hit', () => {
 
 const profileEl = document.getElementById('profile')!;
 let chart: uPlot | undefined;
+let moveBadges: ((u: uPlot) => void) | undefined;
 
 const cssVar = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 const kmLabel = (v: number) => `${v.toLocaleString('en', { maximumFractionDigits: 1 })} km`;
@@ -177,6 +178,30 @@ function snap(u: uPlot, left: number, top: number): [number, number] {
   return [u.valToPos(xs[i], 'x'), u.valToPos(ys[i], 'y')];
 }
 
+// Badges on the axes with the distance and elevation under the crosshair.
+function badges(u: uPlot) {
+  const x = document.createElement('div');
+  const y = document.createElement('div');
+  x.className = 'axis-badge x';
+  y.className = 'axis-badge y';
+  x.hidden = y.hidden = true;
+  u.over.parentElement!.append(x, y);
+
+  return (u: uPlot) => {
+    const { idx, left = -1, top = -1 } = u.cursor;
+    x.hidden = y.hidden = idx == null || left < 0;
+    if (x.hidden) return;
+
+    const { offsetLeft, offsetTop, offsetHeight } = u.over;
+    x.textContent = kmLabel(xs[idx!]);
+    x.style.left = `${offsetLeft + left}px`;
+    x.style.top = `${offsetTop + offsetHeight}px`;
+    y.textContent = mLabel(ys[idx!]);
+    y.style.left = `${offsetLeft}px`;
+    y.style.top = `${offsetTop + top}px`;
+  };
+}
+
 function drawChart() {
   chart?.destroy();
 
@@ -199,7 +224,8 @@ function drawChart() {
         { stroke: ink, grid, ticks: grid, size: 64, values: (_, vals) => vals.map(mLabel) },
       ],
       hooks: {
-        setCursor: [(u) => showDot(u.cursor.idx ?? null)],
+        setCursor: [(u) => showDot(u.cursor.idx ?? null), (u) => moveBadges?.(u)],
+        ready: [(u) => (moveBadges = badges(u))],
         draw: [drawWaypoints],
       },
     },
