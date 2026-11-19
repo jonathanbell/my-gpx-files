@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, description = 'Alpine climbing, hiking, skiing and running routes.', image, layout = 'page' } = Astro.props;
-const SITE = 'Jonathan Bell\'s GPX files';
+const SITE = 'my-gpx-files';
 const fullTitle = title ? `${title} · ${SITE}` : SITE;
 const url = new URL(Astro.url.pathname, Astro.site);
 ---
