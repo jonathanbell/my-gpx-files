@@ -31,8 +31,7 @@ gpx/
 
 ### Notes
 
-Optional. Put a Markdown file next to the GPX with the same name. All fields
-are optional:
+Optional. Put a Markdown file next to the GPX file with the same name (sidecar file). All fields are optional:
 
 ```markdown
 ---
@@ -51,7 +50,9 @@ text is searchable.
 Every push to `main` runs `.github/workflows/deploy.yml`:
 
 1. `npm run fill-elevation` fills missing or zero `<ele>` values from the
-   Copernicus GLO-30 DEM. Recorded elevation is never touched.
+   Copernicus GLO-30 DEM. Recorded elevation is left alone. If a recording's
+   GPS altitude is junk, `npm run fill-elevation -- --replace <file>`
+   overwrites it with DEM values.
 2. `npm run geocode` looks up the region and country of new or moved routes
    on Nominatim and caches them in `data/geocode.json`.
 3. If either changed anything, `github-actions[bot]` commits it back to
@@ -68,5 +69,3 @@ npm run dev       # http://localhost:4321/my-gpx-files/
 npm test          # unit tests
 npm run build && npm run smoke
 ```
-
-Spec: [`docs/PRD.md`](docs/PRD.md).
