@@ -45,7 +45,8 @@ const url = new URL(Astro.url.pathname, Astro.site);
       <a class="brand" href={href('')}>{SITE}</a>
       <nav>
         <a href={href('routes/')}>All routes</a>
-        <button type="button" class="theme-toggle" id="theme-toggle" hidden>Theme: auto</button>
+        <a href="https://gpx.studio/app" id="studio" target="_blank" rel="noopener">Create<span class="long"> a new</span> route</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" hidden><span class="long">Theme: </span><span id="theme-name">auto</span></button>
       </nav>
     </header>
     <slot />
@@ -54,7 +55,11 @@ const url = new URL(Astro.url.pathname, Astro.site);
         const button = document.getElementById('theme-toggle');
         const next = { auto: 'light', light: 'dark', dark: 'auto' };
         const root = document.documentElement;
-        const show = () => (button.textContent = `Theme: ${root.dataset.theme ?? 'auto'}`);
+        const show = () => {
+          const name = root.dataset.theme ?? 'auto';
+          document.getElementById('theme-name').textContent = name;
+          button.setAttribute('aria-label', `Theme: ${name}`);
+        };
 
         button.hidden = false;
         show();

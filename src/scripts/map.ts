@@ -111,11 +111,23 @@ class LayerSwitch implements IControl {
   }
 }
 
+// Point the nav's gpx.studio link at the current view, e.g.
+// https://gpx.studio/app#17.54/48.458886/-123.466653
+function linkStudio(map: MapLibre) {
+  const link = document.getElementById('studio') as HTMLAnchorElement | null;
+  if (!link) return;
+
+  const { lng, lat } = map.getCenter();
+  link.hash = `${map.getZoom().toFixed(2)}/${lat.toFixed(6)}/${lng.toFixed(6)}`;
+}
+
 export function createMap(container: HTMLElement, options: Partial<MapOptions> = {}): MapLibre {
   const map = new MapLibre({ container, maxZoom: 18, ...options });
 
   map.addControl(new NavigationControl({ showCompass: false }));
   map.addControl(new LayerSwitch(), 'top-left');
   map.addControl(new ScaleControl({ unit: 'metric' }));
+  map.on('moveend', () => linkStudio(map));
+  linkStudio(map);
   return map;
 }

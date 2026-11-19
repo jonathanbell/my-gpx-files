@@ -202,6 +202,10 @@ function badges(u: uPlot) {
   };
 }
 
+// No room for a distance label this close to the right edge.
+const EDGE_LABEL = 24;
+const nearEdge = (u: uPlot, v: number) => u.valToPos(v, 'x') > u.bbox.width / devicePixelRatio - EDGE_LABEL;
+
 function drawChart() {
   chart?.destroy();
 
@@ -213,6 +217,7 @@ function drawChart() {
       width: profileEl.clientWidth,
       height: CHART_HEIGHT,
       scales: { x: { time: false } },
+      padding: [null, 0, null, null], // plot ends flush with the map's edge
       cursor: { drag: { x: false, y: false }, points: { size: 10 }, move: snap },
       series: [
         { label: 'Distance', value: (_, v) => (v == null ? '-' : kmLabel(v)) },
@@ -220,7 +225,7 @@ function drawChart() {
           value: (_, v) => (v == null ? '-' : mLabel(v)) },
       ],
       axes: [
-        { stroke: ink, grid, ticks: grid, values: (_, vals) => vals.map(kmLabel) },
+        { stroke: ink, grid, ticks: grid, values: (u, vals) => vals.map((v) => (nearEdge(u, v) ? null : kmLabel(v))) },
         { stroke: ink, grid, ticks: grid, size: 64, values: (_, vals) => vals.map(mLabel) },
       ],
       hooks: {
