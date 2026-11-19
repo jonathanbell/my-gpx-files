@@ -505,3 +505,8 @@ h3 {
     height: min(75vh, 1000px);
   }
 }
+
+/* Sideways drags scrub the chart; vertical ones still scroll the page. */
+.profile .u-over {
+  touch-action: pan-y;
+}

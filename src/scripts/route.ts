@@ -194,7 +194,8 @@ function badges(u: uPlot) {
 
     const { offsetLeft, offsetTop, offsetHeight } = u.over;
     x.textContent = kmLabel(xs[idx!]);
-    x.style.left = `${offsetLeft + left}px`;
+    const half = x.offsetWidth / 2; // keep the badge inside the chart
+    x.style.left = `${Math.min(Math.max(offsetLeft + left, half), u.over.parentElement!.clientWidth - half)}px`;
     x.style.top = `${offsetTop + offsetHeight}px`;
     y.textContent = mLabel(ys[idx!]);
     y.style.left = `${offsetLeft}px`;
@@ -205,6 +206,19 @@ function badges(u: uPlot) {
 // No room for a distance label this close to the right edge.
 const EDGE_LABEL = 24;
 const nearEdge = (u: uPlot, v: number) => u.valToPos(v, 'x') > u.bbox.width / devicePixelRatio - EDGE_LABEL;
+
+// uPlot only tracks the mouse, so drive its cursor from a dragging finger.
+function followTouch(u: uPlot) {
+  const move = (e: TouchEvent) => {
+    const { left, width } = u.over.getBoundingClientRect();
+    const x = Math.min(Math.max(e.touches[0].clientX - left, 0), width - 1);
+    const [l, t] = snap(u, x, 0);
+    u.setCursor({ left: l, top: t });
+  };
+
+  u.over.addEventListener('touchstart', move, { passive: true });
+  u.over.addEventListener('touchmove', move, { passive: true });
+}
 
 function drawChart() {
   chart?.destroy();
@@ -230,7 +244,7 @@ function drawChart() {
       ],
       hooks: {
         setCursor: [(u) => showDot(u.cursor.idx ?? null), (u) => moveBadges?.(u)],
-        ready: [(u) => (moveBadges = badges(u))],
+        ready: [(u) => (moveBadges = badges(u)), followTouch],
         draw: [drawWaypoints],
       },
     },
