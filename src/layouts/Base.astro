@@ -1,7 +1,7 @@
 ---
+import Credit from '../components/Credit.astro';
 import { href } from '../lib/href.ts';
 import '../styles/global.css';
-import Credit from '../components/Credit.astro';
 
 interface Props {
   title?: string;
@@ -12,7 +12,7 @@ interface Props {
 
 const { title, description = 'Alpine climbing, hiking, skiing and running routes.', image, layout = 'page' } = Astro.props;
 const SITE = 'my-gpx-files';
-const fullTitle = title ? `${title} · ${SITE}` : SITE;
+const fullTitle = title ? `${title} · ${SITE}` : `Jonathan Bell: ${SITE}`;
 const url = new URL(Astro.url.pathname, Astro.site);
 ---
 
