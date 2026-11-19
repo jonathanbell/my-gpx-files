@@ -497,7 +497,7 @@ h3 {
 /* Big screens: use the width, and give the route map most of the height. */
 @media (min-width: 1400px) {
   .page main {
-    max-width: 1760px;
+    max-width: 1650px;
     padding-inline: 32px;
   }
 
