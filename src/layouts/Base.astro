@@ -1,6 +1,7 @@
 ---
 import { href } from '../lib/href.ts';
 import '../styles/global.css';
+import Credit from '../components/Credit.astro';
 
 interface Props {
   title?: string;
@@ -50,6 +51,7 @@ const url = new URL(Astro.url.pathname, Astro.site);
       </nav>
     </header>
     <slot />
+    {layout === 'page' && <footer class="site-footer"><Credit /></footer>}
     <script is:inline>
       (() => {
         const button = document.getElementById('theme-toggle');

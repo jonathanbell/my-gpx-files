@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Credit from '../components/Credit.astro';
 import { getSite, previewOf, startOf } from '../lib/site.ts';
 import { dot, km, m } from '../lib/format.ts';
 import { href } from '../lib/href.ts';
@@ -64,7 +65,10 @@ const json = JSON.stringify({ categories: site.categories, routes }).replaceAll(
           ))
         }
       </ul>
-      <footer><a href={href('routes/')}>All routes as a text list</a></footer>
+      <footer>
+        <a href={href('routes/')}>All routes as a text list</a>
+        <Credit />
+      </footer>
     </aside>
     <div class="home-map" id="map" role="region" aria-label="Map of all routes"></div>
   </main>

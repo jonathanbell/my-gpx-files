@@ -44,8 +44,10 @@ const json = JSON.stringify(routeData(route, overlays)).replaceAll('<', '\\u003c
       <div><dt>Min</dt><dd>{m(stats.min)}</dd></div>
     </dl>
 
-    <div class="route-map" id="map" role="region" aria-label={`Map of ${route.title}`}></div>
-    <div class="profile" id="profile" role="img" aria-label={`Elevation profile: ${m(stats.min)} to ${m(stats.max)}`}></div>
+    <div class="viewer" id="viewer">
+      <div class="route-map" id="map" role="region" aria-label={`Map of ${route.title}`}></div>
+      <div class="profile" id="profile" role="img" aria-label={`Elevation profile: ${m(stats.min)} to ${m(stats.max)}`}></div>
+    </div>
 
     <div class="actions">
       <a class="button primary" href="route.gpx" download={route.name}>Download GPX</a>

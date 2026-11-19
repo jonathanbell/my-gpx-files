@@ -3,7 +3,7 @@
 
 import uPlot from 'uplot';
 import 'uplot/dist/uPlot.min.css';
-import { LngLatBounds, Popup, type GeoJSONSource, type LngLat } from 'maplibre-gl';
+import { FullscreenControl, LngLatBounds, Popup, type GeoJSONSource, type LngLat } from 'maplibre-gl';
 import { createMap } from './map.ts';
 import { HOME_SEARCH_KEY } from './keys.ts';
 
@@ -53,6 +53,8 @@ const closeRing = (ring: LonLat[]) => (ring.at(-1)!.join() === ring[0].join() ? 
 const all = data.lines.flat();
 const bounds = all.reduce((b, c) => b.extend(c), new LngLatBounds(all[0], all[0]));
 const map = createMap(document.getElementById('map')!, { bounds, fitBoundsOptions: { padding: PADDING } });
+// Full screen takes the chart along, so the map fills the space above it.
+map.addControl(new FullscreenControl({ container: document.getElementById('viewer')! }));
 const popup = new Popup({ closeButton: false, closeOnClick: false, offset: 8 });
 
 const markers = [

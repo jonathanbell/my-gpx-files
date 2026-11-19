@@ -510,3 +510,36 @@ h3 {
 .profile .u-over {
   touch-action: pan-y;
 }
+
+/* Full screen route viewer: map fills the screen above the chart. */
+.viewer:fullscreen,
+.viewer.maplibregl-pseudo-fullscreen {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.viewer:fullscreen .route-map,
+.viewer.maplibregl-pseudo-fullscreen .route-map {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.site-footer {
+  padding: 1.5rem 16px;
+  border-top: 1px solid var(--line);
+}
+
+.credit {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.sheet footer .credit {
+  margin-top: 0.4rem;
+}
