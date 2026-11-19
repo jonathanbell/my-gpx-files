@@ -1,7 +1,9 @@
 // Fills missing or zero <ele> values in GPX files from the Copernicus GLO-30
-// DEM. Recorded elevations are never touched. Edits files in place.
+// DEM. With --replace, overwrites every <ele> in the named files instead, for
+// recordings whose GPS altitude is too noisy to trust. Edits files in place.
 //
 // Usage: npm run fill-elevation [-- file.gpx ...]  (default: every file in gpx/)
+//        npm run fill-elevation -- --replace file.gpx ...
 
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -19,16 +21,19 @@ const ELE = /<ele>\s*([^<]*?)\s*<\/ele>/;
 const attr = (attrs, name) => attrs.match(new RegExp(`\\b${name}="([^"]+)"`))?.[1];
 const key = (lat, lon) => `${lat},${lon}`;
 
+export const Fill = { Missing: 'missing', All: 'all' };
+const REPLACE_FLAG = '--replace';
+
 function needsEle(body) {
   const value = body?.match(ELE)?.[1];
   return value === undefined || !Number(value); // also catches 0, "" and NaN
 }
 
-export function missingPoints(text) {
+export function missingPoints(text, fill = Fill.Missing) {
   const points = [];
 
   for (const [, , attrs, , body] of text.matchAll(POINT)) {
-    if (!needsEle(body)) continue;
+    if (fill === Fill.Missing && !needsEle(body)) continue;
 
     points.push({ lat: attr(attrs, 'lat'), lon: attr(attrs, 'lon') });
   }
@@ -37,10 +42,10 @@ export function missingPoints(text) {
 }
 
 // `elevations` maps "lat,lon" (attribute strings) to metres.
-export function patchGpx(text, elevations) {
+export function patchGpx(text, elevations, fill = Fill.Missing) {
   return text.replace(POINT, (whole, tag, attrs, close, body) => {
     const ele = elevations.get(key(attr(attrs, 'lat'), attr(attrs, 'lon')));
-    if (ele === undefined || !needsEle(body)) return whole;
+    if (ele === undefined || (fill === Fill.Missing && !needsEle(body))) return whole;
 
     const eleTag = `<ele>${ele.toFixed(1)}</ele>`;
     if (close === '/>') return `<${tag}${attrs}>${eleTag}</${tag}>`;
@@ -112,34 +117,37 @@ async function sampleTile(url, points, elevations) {
   }
 }
 
-async function fillFile(path) {
+async function fillFile(path, fill) {
   const text = await readFile(path, 'utf8');
-  const points = missingPoints(text);
+  const points = missingPoints(text, fill);
   if (points.length === 0) return;
 
   const byTile = Map.groupBy(points, (p) => tileUrl(Number(p.lat), Number(p.lon)));
   const elevations = new Map();
   for (const [url, tilePoints] of byTile) await sampleTile(url, tilePoints, elevations);
 
-  const patched = patchGpx(text, elevations);
+  const patched = patchGpx(text, elevations, fill);
   const before = [...text.matchAll(POINT)].length;
   const after = [...patched.matchAll(POINT)].length;
   if (before !== after) throw new Error(`${path}: point count changed`);
 
   await writeFile(path, patched);
-  const left = missingPoints(patched).length;
+  const left = fill === Fill.All ? points.length - elevations.size : missingPoints(patched).length;
   console.log(`${path}: filled ${points.length - left}/${points.length}`);
 }
 
 async function main() {
-  const args = process.argv.slice(2);
+  const fill = process.argv.includes(REPLACE_FLAG) ? Fill.All : Fill.Missing;
+  const args = process.argv.slice(2).filter((a) => a !== REPLACE_FLAG);
+  if (fill === Fill.All && args.length === 0) throw new Error(`${REPLACE_FLAG} needs explicit files`);
+
   const files = args.length
     ? args
     : (await readdir(GPX_DIR, { recursive: true }))
         .filter((f) => f.endsWith('.gpx'))
         .map((f) => join(GPX_DIR, f));
 
-  for (const file of files) await fillFile(file);
+  for (const file of files) await fillFile(file, fill);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) await main();
