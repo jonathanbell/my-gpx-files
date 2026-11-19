@@ -8,4 +8,4 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ props }) =>
-  new Response(await ogImage((props as { route: Route }).route), { headers: { 'Content-Type': 'image/png' } });
+  new Response(new Uint8Array(await ogImage((props as { route: Route }).route)), { headers: { 'Content-Type': 'image/png' } });

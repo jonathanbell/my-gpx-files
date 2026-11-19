@@ -9,7 +9,8 @@
     "fill-elevation": "node scripts/fill-elevation.mjs",
     "geocode": "node scripts/geocode.mjs",
     "test": "node --test \"scripts/*.test.mjs\" \"src/**/*.test.ts\"",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "check": "astro check"
   },
   "dependencies": {
     "@fontsource/inter": "5.3.0",
@@ -28,5 +29,10 @@
   },
   "engines": {
     "node": ">=24"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
+    "typescript": "5.9.3"
   }
 }

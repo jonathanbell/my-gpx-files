@@ -44,6 +44,7 @@ jobs:
           git commit -m 'chore: fill elevation and geocode'
           git push
 
+      - run: npm run check
       - run: npm test
       - run: npm run build
       - run: npm run smoke

@@ -7,6 +7,7 @@ Static Astro site that shows every GPX file in `gpx/` on a map. Deployed to
 
 ```sh
 npm run dev              # local site at /my-gpx-files/
+npm run check            # astro check: types in .ts and .astro
 npm test                 # node --test, scripts/*.test.mjs and src/**/*.test.ts
 npm run build            # astro build -> dist/
 npm run smoke            # checks dist/ after a build (pages, og.png, gpx bytes, size budget)

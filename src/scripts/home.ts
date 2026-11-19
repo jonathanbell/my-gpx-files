@@ -2,7 +2,7 @@
 // limited to the map viewport. Filter state lives in the query string.
 
 import Fuse from 'fuse.js';
-import { LngLatBounds, Popup, type GeoJSONSource, type MapLayerMouseEvent } from 'maplibre-gl';
+import { LngLatBounds, Popup, type ExpressionSpecification, type GeoJSONSource, type MapLayerMouseEvent } from 'maplibre-gl';
 import { createMap } from './map.ts';
 import { HOME_SEARCH_KEY } from './keys.ts';
 
@@ -94,7 +94,7 @@ function highlight(url: string, title?: string, at?: LonLat) {
   for (const id of ['preview-casing', 'preview']) map.setFilter(id, ['==', ['get', 'url'], url]);
 
   // Fade the other lines so the hovered one stands out where they overlap.
-  const faded = url === NONE ? 1 : ['case', ['==', ['get', 'url'], url], 1, FADED];
+  const faded: number | ExpressionSpecification = url === NONE ? 1 : ['case', ['==', ['get', 'url'], url], 1, FADED];
   for (const id of ['lines', 'lines-casing']) map.setPaintProperty(id, 'line-opacity', faded);
   if (title && at) popup.setLngLat(at).setText(title).addTo(map);
   else popup.remove();
