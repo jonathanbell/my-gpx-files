@@ -1,7 +1,9 @@
 # my-gpx-files
 
 My GPX tracks and routes (alpine climbing, hiking, skiing, running) on a map,
-with elevation profiles, search and shareable links.
+with elevation profiles, search and shareable links. Topo, Outdoor (trails,
+hillshade, contours) and Satellite base maps; a full screen map plus chart
+view on every route page.
 
 Live: <https://jonathanbell.github.io/my-gpx-files/>
 
