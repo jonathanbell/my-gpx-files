@@ -32,6 +32,7 @@ interface Category {
 
 const NONE = '';
 const PADDING = 48;
+const FADED = 0.3;
 const SWIPE = 30; // px of vertical drag that opens or closes the sheet
 
 const { categories, routes } = JSON.parse(document.getElementById('data')!.textContent!) as {
@@ -91,6 +92,10 @@ function highlight(url: string, title?: string, at?: LonLat) {
   if (!loaded) return;
 
   for (const id of ['preview-casing', 'preview']) map.setFilter(id, ['==', ['get', 'url'], url]);
+
+  // Fade the other lines so the hovered one stands out where they overlap.
+  const faded = url === NONE ? 1 : ['case', ['==', ['get', 'url'], url], 1, FADED];
+  for (const id of ['lines', 'lines-casing']) map.setPaintProperty(id, 'line-opacity', faded);
   if (title && at) popup.setLngLat(at).setText(title).addTo(map);
   else popup.remove();
 }
@@ -161,7 +166,9 @@ map.on('load', () => {
   map.addLayer({ id: 'preview-casing', type: 'line', source: 'lines', filter: ['==', ['get', 'url'], NONE],
     paint: { 'line-color': '#fff', 'line-width': 9 }, layout: round });
   map.addLayer({ id: 'preview', type: 'line', source: 'lines', filter: ['==', ['get', 'url'], NONE],
-    paint: { 'line-color': ['get', 'color'], 'line-width': 5 }, layout: round });
+    // Dashes over the white casing set the hovered route apart from same-colour neighbours.
+    paint: { 'line-color': ['get', 'color'], 'line-width': 5, 'line-dasharray': [2, 1.5] },
+    layout: { 'line-join': 'round', 'line-cap': 'butt' } });
   map.addLayer({ id: 'clusters', type: 'circle', source: 'routes', filter: ['has', 'point_count'],
     paint: { 'circle-color': '#1d2321', 'circle-radius': ['step', ['get', 'point_count'], 13, 10, 17, 30, 21],
       'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
