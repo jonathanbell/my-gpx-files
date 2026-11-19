@@ -9,6 +9,7 @@
   --chip-on: #1d2321;
   --chip-on-ink: #ffffff;
   --shadow: 0 2px 12px rgb(0 0 0 / 12%);
+  --radius: 2px;
   color-scheme: light;
 }
 
@@ -138,7 +139,7 @@ h3 {
 
 .theme-toggle {
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: transparent;
   padding: 0.2rem 0.7rem;
 }
@@ -150,7 +151,7 @@ h3 {
   align-items: center;
   gap: 0.4rem;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink);
   padding: 0.5rem 0.9rem;
@@ -169,7 +170,7 @@ h3 {
   align-items: center;
   gap: 0.4rem;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--surface);
   padding: 0.25rem 0.7rem;
   font-size: 0.85rem;
@@ -214,7 +215,7 @@ h3 {
 
 .stats div {
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--surface);
   padding: 0.5rem 0.75rem;
 }
@@ -234,7 +235,7 @@ h3 {
 .route-map {
   height: min(60vh, 520px);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -309,7 +310,7 @@ h3 {
 .sheet input[type='search'] {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--bg);
   color: var(--ink);
   padding: 0.55rem 0.75rem;
@@ -392,7 +393,7 @@ h3 {
     width: auto;
     height: 75%;
     border-right: 0;
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius) var(--radius) 0 0;
     box-shadow: var(--shadow);
     transform: translateY(calc(100% - 9.5rem));
     transition: transform 0.25s ease;
@@ -469,7 +470,7 @@ h3 {
   position: absolute;
   z-index: 1;
   padding: 0.1rem 0.35rem;
-  border-radius: 4px;
+  border-radius: var(--radius);
   background: var(--ink);
   color: var(--bg);
   font-size: 0.75rem;
